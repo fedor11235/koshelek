@@ -1,6 +1,5 @@
 <template>
     <div>
-      <dataBus />
         <div class="nav">
             <a             
                 class="nav"      
@@ -43,6 +42,8 @@ export default {
       this.emitter.on('my-event', (evt) => {
         console.log(evt)
       })
+      const ws = inject('ws')
+      console.log(ws)
   }
 }
 </script>

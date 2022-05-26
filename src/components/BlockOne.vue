@@ -1,5 +1,5 @@
 <template>
-    <div class="block" @click='testemmit'>
+    <div class="block">
         <p>Hi I'm the first block</p>
     </div>
 </template>
@@ -7,10 +7,15 @@
 <script>
 export default {
   name: 'BlockOne',
-  methods: {
-    testemmit(){
-        this.emitter.emit('my-event', { a: 'b' })
+  data() {
+    return {
+
     }
+  },
+  created() {
+    this.emitter.on('get-crypto', (event) => {
+      console.log(event)
+    })
   }
 }
 </script>
