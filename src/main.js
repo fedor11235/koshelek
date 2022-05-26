@@ -1,4 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import core from '@/core/core'
 
-createApp(App).mount('#app')
+
+const app = createApp(App)
+app.use(core)
+app.mount('#app')
+// createApp(App).use(core).mount('#app')
