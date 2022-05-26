@@ -55,14 +55,14 @@ export default {
 }
 
 .nav a{
-    float: left;
-    color: #f2f2f2;
-    padding: 14px 16px;
-    text-align: center;
-    font-size: 17px;
-    text-decoration: none;
-    margin-right: 5px;
-    cursor: pointer;
+  float: left;
+  color: #f2f2f2;
+  padding: 14px 16px;
+  text-align: center;
+  font-size: 17px;
+  text-decoration: none;
+  margin-right: 5px;
+  cursor: pointer;
 }
 
 .nav a:hover{

@@ -2,13 +2,16 @@
     <div class="block">
         <p>Hi I'm the first block</p>
         <div class="table">
-          <div class="col" v-for="(item, index) in crypto" :key="index" >
+          <div class="col" v-for="(items, index) in crypto" :key="index" >
             <div class="title">{{index}}</div>
-            <div>{{item}}</div>
+            <div class="text" v-if="index!=='a' & index!=='b'">{{items}}</div>
+            <div v-if="index==='a' | index==='b'">
+              <div class="text" v-for="(item, index) in items" :key="index">
+                {{item[0]}} : {{item[1]}}
+              </div>
+            </div>
           </div>
         </div>
-        <!-- <div>Bit</div>
-        <div>Ask</div> -->
     </div>
 </template>
 
@@ -49,5 +52,9 @@ export default {
 .title {
   background-color: #333;
   color: #f2f2f2;
+}
+
+.text {
+  font-size: 12px;
 }
 </style>
