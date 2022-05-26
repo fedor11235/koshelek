@@ -1,5 +1,6 @@
 <template>
     <div>
+      <dataBus />
         <div class="nav">
             <a             
                 class="nav"      
@@ -18,6 +19,7 @@
 // import HeaderPerent from '@/components/HeaderPerent'
 import BlockOne from '@/components/BlockOne'
 import BlockTwo from '@/components/BlockTwo'
+import { inject } from 'vue'
 
 export default {
   name: 'ParentPage',
@@ -38,7 +40,9 @@ export default {
     }
   },
   created() {
-      console.log(this)
+      this.emitter.on('my-event', (evt) => {
+        console.log(evt)
+      })
   }
 }
 </script>

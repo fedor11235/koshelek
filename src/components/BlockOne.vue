@@ -1,5 +1,5 @@
 <template>
-    <div class="block">
+    <div class="block" @click='testemmit'>
         <p>Hi I'm the first block</p>
     </div>
 </template>
@@ -7,6 +7,11 @@
 <script>
 export default {
   name: 'BlockOne',
+  methods: {
+    testemmit(){
+        this.emitter.emit('my-event', { a: 'b' })
+    }
+  }
 }
 </script>
 
