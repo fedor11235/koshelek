@@ -7,15 +7,15 @@
         <div class="body">
           <div class="content">
             <div class="subtitle">Price</div>
-            <div v-for="(item, index) in stockGlass.bids" :key="index">{{item[0]}}</div>
+            <div v-for="(item, index) in crypto.bids" :key="index">{{item[0]}}</div>
           </div>
           <div class="content">
             <div class="subtitle">Amount</div>
-            <div v-for="(item, index) in stockGlass.bids" :key="index">{{item[1]}}</div>
+            <div v-for="(item, index) in crypto.bids" :key="index">{{item[1]}}</div>
           </div>
           <div class="content" v-if="width>600">
             <div class="subtitle">Total</div>
-            <div v-for="(item, index) in stockGlass.bids" :key="index">{{item[0] * item[1]}}</div>
+            <div v-for="(item, index) in crypto.bids" :key="index">{{item[0] * item[1]}}</div>
           </div>
         </div>
       </div>
@@ -24,15 +24,15 @@
         <div class="body">
            <div class="content">
             <div class="subtitle">Price</div>
-            <div v-for="(item, index) in stockGlass.asks" :key="index">{{item[0]}}</div>
+            <div v-for="(item, index) in crypto.asks" :key="index">{{item[0]}}</div>
           </div>
           <div class="content">
             <div class="subtitle">Amount</div>
-            <div v-for="(item, index) in stockGlass.asks" :key="index">{{item[1]}}</div>
+            <div v-for="(item, index) in crypto.asks" :key="index">{{item[1]}}</div>
           </div>
           <div class="content"  v-if="width>600">
             <div class="subtitle">Total</div>
-            <div v-for="(item, index) in stockGlass.asks" :key="index">{{item[0] * item[1]}}</div>
+            <div v-for="(item, index) in crypto.asks" :key="index">{{item[0] * item[1]}}</div>
           </div>
         </div>
       </div>
@@ -41,12 +41,16 @@
 </template>
 
 <script>
+import DropDown from '@/components/DropDown'
 export default {
-  name: "BlockOne",
+  name: "BlockTwo",
+  components: {
+    DropDown
+  },
   data() {
     return {
       width: Number,
-      stockGlass: Object,
+      crypto: Object,
     };
   },
   methods: {
@@ -57,8 +61,8 @@ export default {
   created() {
     this.width = window.innerWidth;
     window.addEventListener("resize", this.updateWidth);
-    this.emitter.on("get-stock-glass", (event) => {
-      this.stockGlass = event;
+    this.emitter.on("get-crypto", (event) => {
+      this.crypto = event;
     });
   },
 };
@@ -81,8 +85,14 @@ export default {
   flex: 1;
   margin: 0 5px;
   text-align: center;
+  height: 200px;
+  background-color: #333;
+  overflow: hidden;
 }
 
+.col:hover {
+    overflow-y: scroll;
+}
 .title {
   background-color: #333;
   color: #f2f2f2;
@@ -92,7 +102,6 @@ export default {
   display: flex;
   width: 100%;
   justify-content: center;
-  background-color: #333;
   flex: 1;
 }
 
@@ -105,6 +114,8 @@ export default {
 }
 
 .subtitle {
+  position: sticky;
+  top: 0;
   background-color: #95969e;
   color: #f2f2f2;
 }
