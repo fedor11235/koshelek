@@ -1,19 +1,21 @@
 import emitter from '@/plugins/emitter.js'
+import axios from 'axios'
+
 const ws = new WebSocket("wss://stream.binance.com:9443/ws/bnbbtc@depth")
 ws.onmessage = (event) => {
     const stockObject = JSON.parse(event.data)
     emitter.emit('get-crypto', {
-        'Bid': {
-            'Price': stockObject.b[0], 
-            'Amount': stockObject.b[1],
-        }, 
-        'Ask': {
-            'Price': stockObject.a[0], 
-            'Amount': stockObject.a[1],   
-        }
+        'bids': stockObject.b,
+        'asks': stockObject.a
     })
+
+    axios.get('https://api.binance.com/api/v3/depth?symbol=BNBBTC&limit=50')
+        .then((value) => {
+            emitter.emit('get-stock-glass', value.data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
 }
 
 export default ws
-
-//https://api.binance.com/api/v3/depth?symbol=BNBBTC&limit=1000 .

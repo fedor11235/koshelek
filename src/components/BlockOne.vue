@@ -1,21 +1,39 @@
 <template>
   <div class="block">
-    {{width}}
-    <p>Hi I'm the first block</p>
+    <br/>
     <div class="table">
-      <div class="col" v-for="(items, index) in crypto" :key="index">
-        <div class="title">{{ index }}</div>
-          <div class="body" >
-            <div class="text" v-for="(item, index) in items" :key="index">
-              <div class="subtitle">{{ index }}</div>
-              <div v-if="index !== 'Total'">{{ item[0] }} : {{ item[1] }}</div>
-              <div v-if="index === 'Total'">{{ item }}</div>
-              <!-- <div class="subtitle" v-show="index !== 'Total'">{{ index }}</div>
-              <div  v-show="index !== 'Total'">{{ item[0] }} : {{ item[1] }}</div>
-
-              <div class="subtitle" v-show="index === 'Total' & width>600">{{ index }}</div>
-              <div  v-show="index === 'Total' & width>600">{{ item }}</div> -->
-            </div>
+      <div class="col">
+        <div class="title">BID</div>
+        <div class="body">
+          <div class="content">
+            <div class="subtitle">Price</div>
+            <div v-for="(item, index) in crypto.bids" :key="index">{{item[0]}}</div>
+          </div>
+          <div class="content">
+            <div class="subtitle">Amount</div>
+            <div v-for="(item, index) in crypto.bids" :key="index">{{item[1]}}</div>
+          </div>
+          <div class="content" v-if="width>600">
+            <div class="subtitle">Total</div>
+            <div v-for="(item, index) in crypto.bids" :key="index">{{item[0] * item[1]}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="title">ASK</div>
+        <div class="body">
+           <div class="content">
+            <div class="subtitle">Price</div>
+            <div v-for="(item, index) in crypto.asks" :key="index">{{item[0]}}</div>
+          </div>
+          <div class="content">
+            <div class="subtitle">Amount</div>
+            <div v-for="(item, index) in crypto.asks" :key="index">{{item[1]}}</div>
+          </div>
+          <div class="content"  v-if="width>600">
+            <div class="subtitle">Total</div>
+            <div v-for="(item, index) in crypto.asks" :key="index">{{item[0] * item[1]}}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -27,32 +45,20 @@ export default {
   name: "BlockOne",
   data() {
     return {
-      width: 0,
-      crypto,
+      width: Number,
+      crypto: Object,
     };
   },
   methods: {
     updateWidth() {
       this.width = window.innerWidth;
-      if(this.width>600){
-        this.crypto.Bid.Total = parseFloat(this.crypto.Bid.Price) + parseFloat(this.crypto.Bid.Amount);
-        this.crypto.Ask.Total = parseFloat(this.crypto.Ask.Price) + parseFloat(this.crypto.Ask.Amount);
-      } else {
-        delete this.crypto.Bid.Total
-        delete this.crypto.Ask.Total
-      }
-    }
+    },
   },
   created() {
-    this.width=window.innerWidth
-    window.addEventListener('resize', this.updateWidth);
+    this.width = window.innerWidth;
+    window.addEventListener("resize", this.updateWidth);
     this.emitter.on("get-crypto", (event) => {
       this.crypto = event;
-      if(this.width>600){
-        this.crypto.Bid.Total = parseFloat(this.crypto.Bid.Price) + parseFloat(this.crypto.Bid.Amount);
-        this.crypto.Ask.Total = parseFloat(this.crypto.Ask.Price) + parseFloat(this.crypto.Ask.Amount);
-      }
-      console.log(this.crypto);
     });
   },
 };
@@ -67,6 +73,7 @@ export default {
 .table {
   display: flex;
   width: 100%;
+  justify-content: center;
   margin: 0 -5px;
   flex: 1;
 }
@@ -75,22 +82,31 @@ export default {
   margin: 0 5px;
   text-align: center;
 }
+
 .title {
   background-color: #333;
   color: #f2f2f2;
 }
 
-.body{
+.body {
   display: flex;
+  width: 100%;
+  justify-content: center;
+  background-color: #333;
   flex: 1;
 }
 
-.subtitle{
+.content {
+  flex: 1;
+  flex-direction: column;
+  margin: 0 2px;
+  color: #f2f2f2;
+  background-color: #545558;
+}
+
+.subtitle {
   background-color: #95969e;
   color: #f2f2f2;
-  flex: 1;
-  padding: 0 1px;
-  text-align: center;
 }
 
 .text {

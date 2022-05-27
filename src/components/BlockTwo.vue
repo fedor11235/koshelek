@@ -1,18 +1,120 @@
 <template>
-    <div class="block">
-        <p>Hi I'm the second block</p>
+  <div class="block">
+    <br/>
+    <div class="table">
+      <div class="col">
+        <div class="title">BID</div>
+        <div class="body">
+          <div class="content">
+            <div class="subtitle">Price</div>
+            <div v-for="(item, index) in stockGlass.bids" :key="index">{{item[0]}}</div>
+          </div>
+          <div class="content">
+            <div class="subtitle">Amount</div>
+            <div v-for="(item, index) in stockGlass.bids" :key="index">{{item[1]}}</div>
+          </div>
+          <div class="content" v-if="width>600">
+            <div class="subtitle">Total</div>
+            <div v-for="(item, index) in stockGlass.bids" :key="index">{{item[0] * item[1]}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="title">ASK</div>
+        <div class="body">
+           <div class="content">
+            <div class="subtitle">Price</div>
+            <div v-for="(item, index) in stockGlass.asks" :key="index">{{item[0]}}</div>
+          </div>
+          <div class="content">
+            <div class="subtitle">Amount</div>
+            <div v-for="(item, index) in stockGlass.asks" :key="index">{{item[1]}}</div>
+          </div>
+          <div class="content"  v-if="width>600">
+            <div class="subtitle">Total</div>
+            <div v-for="(item, index) in stockGlass.asks" :key="index">{{item[0] * item[1]}}</div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'BlockOne',
-}
+  name: "BlockOne",
+  data() {
+    return {
+      width: Number,
+      stockGlass: Object,
+    };
+  },
+  methods: {
+    updateWidth() {
+      this.width = window.innerWidth;
+    },
+  },
+  created() {
+    this.width = window.innerWidth;
+    window.addEventListener("resize", this.updateWidth);
+    this.emitter.on("get-stock-glass", (event) => {
+      this.stockGlass = event;
+    });
+  },
+};
 </script>
 
 <style scoped>
 .block {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.table {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin: 0 -5px;
+  flex: 1;
+}
+.col {
+  flex: 1;
+  margin: 0 5px;
+  text-align: center;
+}
+
+.title {
+  background-color: #333;
+  color: #f2f2f2;
+}
+
+.body {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  background-color: #333;
+  flex: 1;
+}
+
+.content {
+  flex: 1;
+  flex-direction: column;
+  margin: 0 2px;
+  color: #f2f2f2;
+  background-color: #545558;
+}
+
+.subtitle {
+  background-color: #95969e;
+  color: #f2f2f2;
+}
+
+.text {
+  background-color: #575555;
+  color: #f2f2f2;
+  font-size: 12px;
+  flex: 1;
+  padding: 0 1px;
+  text-align: center;
 }
 </style>
