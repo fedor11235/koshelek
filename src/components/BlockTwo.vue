@@ -1,38 +1,52 @@
 <template>
   <div class="block">
-    <br/>
+    <br />
+    <DropDown />
+    <br />
     <div class="table">
       <div class="col">
         <div class="title">BID</div>
         <div class="body">
           <div class="content">
             <div class="subtitle">Price</div>
-            <div v-for="(item, index) in crypto.bids" :key="index">{{item[0]}}</div>
+            <div v-for="(item, index) in crypto.bids" :key="index">
+              {{ item[0] }}
+            </div>
           </div>
           <div class="content">
             <div class="subtitle">Amount</div>
-            <div v-for="(item, index) in crypto.bids" :key="index">{{item[1]}}</div>
+            <div v-for="(item, index) in crypto.bids" :key="index">
+              {{ item[1] }}
+            </div>
           </div>
-          <div class="content" v-if="width>600">
+          <div class="content" v-if="width > 600">
             <div class="subtitle">Total</div>
-            <div v-for="(item, index) in crypto.bids" :key="index">{{item[0] * item[1]}}</div>
+            <div v-for="(item, index) in crypto.bids" :key="index">
+              {{ item[0] * item[1] }}
+            </div>
           </div>
         </div>
       </div>
       <div class="col">
         <div class="title">ASK</div>
         <div class="body">
-           <div class="content">
+          <div class="content">
             <div class="subtitle">Price</div>
-            <div v-for="(item, index) in crypto.asks" :key="index">{{item[0]}}</div>
+            <div v-for="(item, index) in crypto.asks" :key="index">
+              {{ item[0] }}
+            </div>
           </div>
           <div class="content">
             <div class="subtitle">Amount</div>
-            <div v-for="(item, index) in crypto.asks" :key="index">{{item[1]}}</div>
+            <div v-for="(item, index) in crypto.asks" :key="index">
+              {{ item[1] }}
+            </div>
           </div>
-          <div class="content"  v-if="width>600">
+          <div class="content" v-if="width > 600">
             <div class="subtitle">Total</div>
-            <div v-for="(item, index) in crypto.asks" :key="index">{{item[0] * item[1]}}</div>
+            <div v-for="(item, index) in crypto.asks" :key="index">
+              {{ item[0] * item[1] }}
+            </div>
           </div>
         </div>
       </div>
@@ -41,11 +55,11 @@
 </template>
 
 <script>
-import DropDown from '@/components/DropDown'
+import DropDown from "@/components/DropDown";
 export default {
-  name: "BlockTwo",
+  name: 'BlockTwo',
   components: {
-    DropDown
+    DropDown,
   },
   data() {
     return {
@@ -60,8 +74,8 @@ export default {
   },
   created() {
     this.width = window.innerWidth;
-    window.addEventListener("resize", this.updateWidth);
-    this.emitter.on("get-crypto", (event) => {
+    window.addEventListener('resize', this.updateWidth);
+    this.emitter.on('get-crypto', (event) => {
       this.crypto = event;
     });
   },
@@ -91,7 +105,7 @@ export default {
 }
 
 .col:hover {
-    overflow-y: scroll;
+  overflow-y: scroll;
 }
 .title {
   background-color: #333;

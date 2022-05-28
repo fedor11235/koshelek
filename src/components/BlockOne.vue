@@ -42,7 +42,7 @@
 
 <script>
 export default {
-  name: "BlockOne",
+  name: 'BlockOne',
   data() {
     return {
       width: Number,
@@ -56,8 +56,8 @@ export default {
   },
   created() {
     this.width = window.innerWidth;
-    window.addEventListener("resize", this.updateWidth);
-    this.emitter.on("get-stock-glass", (event) => {
+    window.addEventListener('resize', this.updateWidth);
+    this.emitter.on('get-stock-glass', (event) => {
       this.stockGlass = event;
     });
   },
