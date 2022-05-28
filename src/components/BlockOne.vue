@@ -1,37 +1,37 @@
 <template>
-  <div class="block">
+  <div class="block-one">
     <br/>
-    <div class="table">
-      <div class="col">
-        <div class="title">BID</div>
-        <div class="body">
-          <div class="content">
-            <div class="subtitle">Price</div>
+    <div class="block-one__table">
+      <div class="block-one__col">
+        <div class="block-one__title">BID</div>
+        <div class="block-one__body">
+          <div class="block-one__content">
+            <div class="block-one__subtitle">Price</div>
             <div v-for="(item, index) in stockGlass.bids" :key="index">{{item[0]}}</div>
           </div>
-          <div class="content">
-            <div class="subtitle">Amount</div>
+          <div class="block-one__content">
+            <div class="block-one__subtitle">Amount</div>
             <div v-for="(item, index) in stockGlass.bids" :key="index">{{item[1]}}</div>
           </div>
-          <div class="content" v-if="width>600">
-            <div class="subtitle">Total</div>
+          <div class="block-one__content" v-if="width>600">
+            <div class="block-one__subtitle">Total</div>
             <div v-for="(item, index) in stockGlass.bids" :key="index">{{item[0] * item[1]}}</div>
           </div>
         </div>
       </div>
-      <div class="col">
-        <div class="title">ASK</div>
-        <div class="body">
-           <div class="content">
-            <div class="subtitle">Price</div>
+      <div class="block-one__col">
+        <div class="block-one__title">ASK</div>
+        <div class="block-one__body">
+           <div class="block-one__content">
+            <div class="block-one__subtitle">Price</div>
             <div v-for="(item, index) in stockGlass.asks" :key="index">{{item[0]}}</div>
           </div>
-          <div class="content">
-            <div class="subtitle">Amount</div>
+          <div class="block-one__content">
+            <div class="block-one__subtitle">Amount</div>
             <div v-for="(item, index) in stockGlass.asks" :key="index">{{item[1]}}</div>
           </div>
-          <div class="content"  v-if="width>600">
-            <div class="subtitle">Total</div>
+          <div class="block-one__content"  v-if="width>600">
+            <div class="block-one__subtitle">Total</div>
             <div v-for="(item, index) in stockGlass.asks" :key="index">{{item[0] * item[1]}}</div>
           </div>
         </div>
@@ -70,14 +70,14 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-.table {
+.block-one__table {
   display: flex;
   width: 100%;
   justify-content: center;
   margin: 0 -5px;
   flex: 1;
 }
-.col {
+.block-one__col {
   flex: 1;
   margin: 0 5px;
   text-align: center;
@@ -86,22 +86,22 @@ export default {
   overflow: hidden;
 }
 
-.col:hover {
+.block-one__col:hover {
     overflow-y: scroll;
 }
-.title {
+.block-one__title {
   background-color: #333;
   color: #f2f2f2;
 }
 
-.body {
+.block-one__body {
   display: flex;
   width: 100%;
   justify-content: center;
   flex: 1;
 }
 
-.content {
+.block-one__content {
   flex: 1;
   flex-direction: column;
   margin: 0 2px;
@@ -109,14 +109,14 @@ export default {
   background-color: #545558;
 }
 
-.subtitle {
+.block-one__subtitle {
   position: sticky;
   top: 0;
   background-color: #95969e;
   color: #f2f2f2;
 }
 
-.text {
+.block-one__text {
   background-color: #575555;
   color: #f2f2f2;
   font-size: 12px;

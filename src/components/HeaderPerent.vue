@@ -1,7 +1,7 @@
 <template>
-    <div class="nav">
-        <a             
-            class="nav"      
+    <div class="header">
+        <a     
+            class="header__link"            
             v-for="tab in tabs"
             :key="tab"
             @click="currentTab = tab"
@@ -32,12 +32,12 @@ export default {
 </script>
 
 <style>
-.nav {
+.header {
     background-color: #333;
     overflow: hidden;
 }
 
-.nav a{
+.header__link{
     float: left;
     color: #f2f2f2;
     padding: 14px 16px;
@@ -45,9 +45,10 @@ export default {
     font-size: 17px;
     text-decoration: none;
     margin-right: 5px;
+    cursor:pointer;
 }
 
-.nav a:hover{
+.header__link:hover{
     background: #ddd;
     color: #333;
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="drop-down">
-    <select v-model="selected" class="select">
+    <select v-model="selected" class="drop-down__select">
         <option value="BTCUSDT">BTCUSDT</option>
         <option value="BNBBTC">BNBBTC</option>
         <option value="ETHBTC">ETHBTC</option>
@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style scoped>
-.select {
+.drop-down__select {
     background-color: #333;
     color:#f2f2f2;
     outline: none;
