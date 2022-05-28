@@ -1,13 +1,33 @@
 <template>
     <div class="nav">
-        <a href="#">Block 1</a>
-        <a href="#">Block 2</a>
+        <a             
+            class="nav"      
+            v-for="tab in tabs"
+            :key="tab"
+            @click="currentTab = tab"
+        >
+            Block {{tab}}
+        </a>
     </div>
 </template>
 
 <script scoped>
 export default {
   name: 'HeaderPerent',
+  data() {
+    return {
+      currentTab: 'One',
+      tabs: ['One', 'Two']
+    }
+  },
+  watch: {
+      currentTab(val) {
+          this.emitter.emit("active-block", val);
+      }
+  },
+  created(){
+    this.emitter.emit("active-block", this.currentTab);
+  }
 }
 </script>
 

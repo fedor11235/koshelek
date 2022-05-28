@@ -1,60 +1,42 @@
 <template>
-    <div>
-        <div class="nav">
-            <a             
-                class="nav"      
-                v-for="tab in tabs"
-                :key="tab"
-                @click="currentTab = tab"
-            >
-                Block {{tab}}
-            </a>
-        </div>
-        <component :is="currentTabComponent"></component>
-    </div>
+  <div>
+    <HeaderPerent />
+    <component :is="currentTabComponent"></component>
+  </div>
 </template>
 
 <script>
-// import HeaderPerent from '@/components/HeaderPerent'
-import BlockOne from '@/components/BlockOne'
-import BlockTwo from '@/components/BlockTwo'
-import { inject } from 'vue'
+import HeaderPerent from "@/components/HeaderPerent";
+import BlockOne from "@/components/BlockOne";
+import BlockTwo from "@/components/BlockTwo";
 
 export default {
-  name: 'ParentPage',
+  name: "ParentPage",
   components: {
-    // HeaderPerent,
+    HeaderPerent,
     BlockOne,
-    BlockTwo
+    BlockTwo,
   },
   data() {
     return {
-      currentTab: 'One',
-      tabs: ['One', 'Two']
-    }
-  },
-  computed: {
-    currentTabComponent() {
-      return 'Block' + this.currentTab
+      currentTabComponent:'BlockOne'
     }
   },
   created() {
-      this.emitter.on('my-event', (evt) => {
-        console.log(evt)
-      })
-      const ws = inject('ws')
-      console.log(ws)
-  }
-}
+    this.emitter.on("active-block", (evt) => {
+      this.currentTabComponent='Block' + evt;
+    });
+  },
+};
 </script>
 
 <style>
 .nav {
-    background-color: #333;
-    overflow: hidden;
+  background-color: #333;
+  overflow: hidden;
 }
 
-.nav a{
+.nav a {
   float: left;
   color: #f2f2f2;
   padding: 14px 16px;
@@ -65,8 +47,8 @@ export default {
   cursor: pointer;
 }
 
-.nav a:hover{
-    background: #ddd;
-    color: #333;
+.nav a:hover {
+  background: #ddd;
+  color: #333;
 }
 </style>

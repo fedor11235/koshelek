@@ -21,11 +21,6 @@ export default {
       this.emitter.emit('change-crypto', [val, val.toLowerCase()])
     }
   }
-//   components: {
-//     // HeaderPerent,
-//     BlockOne,
-//     BlockTwo
-//   },
 };
 </script>
 
