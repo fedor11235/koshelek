@@ -82,13 +82,7 @@ export default {
   flex: 1;
   margin: 0 5px;
   text-align: center;
-  height: 200px;
   background-color: #333;
-  overflow: hidden;
-}
-
-.block-one__col:hover {
-    overflow-y: scroll;
 }
 .block-one__title {
   background-color: #333;
@@ -100,14 +94,21 @@ export default {
   width: 100%;
   justify-content: center;
   flex: 1;
+  background-color: #575555;
+  height: 200px;
+}
+
+.block-one__body:hover {
+  overflow-y: scroll;
 }
 
 .block-one__content {
   flex: 1;
   flex-direction: column;
   margin: 0 2px;
+  font-size: 12px;
   color: #f2f2f2;
-  background-color: #545558;
+  height: 200px;
 }
 
 .block-one__subtitle {
@@ -115,15 +116,6 @@ export default {
   top: 0;
   background-color: #95969e;
   color: #f2f2f2;
-}
-
-.block-one__text {
-  background-color: #575555;
-  color: #f2f2f2;
-  font-size: 12px;
-  flex: 1;
-  padding: 0 1px;
-  text-align: center;
 }
 </style>
 
