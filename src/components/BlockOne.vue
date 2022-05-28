@@ -55,9 +55,10 @@ export default {
     },
   },
   created() {
+
     this.width = window.innerWidth;
     window.addEventListener('resize', this.updateWidth);
-    this.emitter.on('get-stock-glass', (event) => {
+    this.core.emitter.on('get-stock-glass', (event) => {
       this.stockGlass = event;
     });
   },

@@ -22,11 +22,11 @@ export default {
   },
   watch: {
       currentTab(val) {
-          this.emitter.emit("active-block", val);
+          this.core.emitter.emit("active-block", val);
       }
   },
   created(){
-    this.emitter.emit("active-block", this.currentTab);
+    this.core.emitter.emit("active-block", this.currentTab);
   }
 }
 </script>

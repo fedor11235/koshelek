@@ -4,15 +4,15 @@ import axios from 'axios'
 let changeCryptoLower = 'btcusdt'
 let changeCryptoBig = 'BNBBTC'
 
-let ws = new WebSocket(`wss://stream.binance.com:9443/ws/${changeCryptoLower}@depth`)
+let api = new WebSocket(`wss://stream.binance.com:9443/ws/${changeCryptoLower}@depth`)
 
 emitter.on('change-crypto', (event) => {
     changeCryptoBig= event[0]
     changeCryptoLower = event[1]
-    ws.close(1000, "меняем валюту");
-    ws = new WebSocket(`wss://stream.binance.com:9443/ws/${changeCryptoLower}@depth`)
+    api.close(1000, "меняем валюту");
+    api = new WebSocket(`wss://stream.binance.com:9443/ws/${changeCryptoLower}@depth`)
     
-    ws.onmessage = (event) => {
+    api.onmessage = (event) => {
         const stockObject = JSON.parse(event.data)
         console.log(stockObject)
         emitter.emit('get-crypto', {
@@ -29,7 +29,7 @@ emitter.on('change-crypto', (event) => {
             })
     }
 
-    ws.onclose = (event) => {
+    api.onclose = (event) => {
         if (event.wasClean) {
             console.log(`[close] Соединение закрыто чисто, код=${event.code} причина=${event.reason}`);
         } else {
@@ -37,13 +37,13 @@ emitter.on('change-crypto', (event) => {
         }
     };
     
-    ws.onerror = (error) => {
+    api.onerror = (error) => {
         console.log(`[error] ${error.message}`);
     };
     
 });
 
-ws.onmessage = (event) => {
+api.onmessage = (event) => {
     const stockObject = JSON.parse(event.data)
     console.log(stockObject)
     emitter.emit('get-crypto', {
@@ -60,7 +60,7 @@ ws.onmessage = (event) => {
         })
 }
 
-ws.onclose = (event) => {
+api.onclose = (event) => {
     if (event.wasClean) {
         console.log(`[close] Соединение закрыто чисто, код=${event.code} причина=${event.reason}`);
     } else {
@@ -68,8 +68,8 @@ ws.onclose = (event) => {
     }
 };
 
-ws.onerror = (error) => {
+api.onerror = (error) => {
     console.log(`[error] ${error.message}`);
 };
 
-export default ws
+export default api

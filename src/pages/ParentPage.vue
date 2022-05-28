@@ -6,12 +6,12 @@
 </template>
 
 <script>
-import HeaderPerent from "@/components/HeaderPerent";
-import BlockOne from "@/components/BlockOne";
-import BlockTwo from "@/components/BlockTwo";
+import HeaderPerent from '@/components/HeaderPerent';
+import BlockOne from '@/components/BlockOne';
+import BlockTwo from '@/components/BlockTwo';
 
 export default {
-  name: "ParentPage",
+  name: 'ParentPage',
   components: {
     HeaderPerent,
     BlockOne,
@@ -23,7 +23,7 @@ export default {
     }
   },
   created() {
-    this.emitter.on("active-block", (evt) => {
+    this.core.emitter.on("active-block", (evt) => {
       this.currentTabComponent='Block' + evt;
     });
   },

@@ -18,7 +18,7 @@ export default {
   },
   watch: {
   selected (val) {
-      this.emitter.emit('change-crypto', [val, val.toLowerCase()])
+      this.core.emitter.emit('change-crypto', [val, val.toLowerCase()])
     }
   }
 };
