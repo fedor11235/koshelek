@@ -82,7 +82,9 @@ export default {
   flex: 1;
   margin: 0 5px;
   text-align: center;
+  height: 200px;
   background-color: #333;
+  overflow: hidden;
 }
 .block-one__title {
   background-color: #333;
